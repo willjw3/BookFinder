@@ -51,7 +51,7 @@ class App extends Component {
             <h4 className="mb-5">Displaying results for "{this.state.searchWord}"</h4>
             {items.map(item =>
               <Book 
-                imgUrl={item.volumeInfo.imageLinks.thumbnail}
+                imgUrl={item.volumeInfo.imageLinks}
                 title={item.volumeInfo.title}
                 authors={item.volumeInfo.authors}
                 publisher={item.volumeInfo.publisher}
