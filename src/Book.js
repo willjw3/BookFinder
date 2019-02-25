@@ -12,8 +12,8 @@ function Book(props) {
                 ) : (
                         <p>No image available</p>
                     )}
-                    <div className="card border-0" style={{width: '25rem'}}>
-                        <div className="card-body">
+                    <div className="card text-left border-0 ml-5" style={{width: '25rem'}}>
+                        <div className="card-body p-0">
                             <h5 className="card-title">{props.title}</h5>
                                 {props.authors ? (
                                     <div>
@@ -25,7 +25,7 @@ function Book(props) {
                                         <h6>No Authors listed</h6>
                                     )}
                             <p className="card-text">{props.publisher}</p>
-                                <a href={props.info} className="card-link btn btn-warning position-relative b-0" role="button">See More</a>
+                                <a id="seymour" href={props.info} className="card-link btn btn-warning position-relative" role="button">See More</a>
                         </div>
                     </div>
             </div>

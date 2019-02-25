@@ -42,9 +42,9 @@ class App extends Component {
   render() {
     const { items } = this.state;
     return (
-      <div className="App">
+      <div className="">
         <h1 className="text-center d-block">Book Finder <FontAwesomeIcon icon={faBook} /></h1>
-        <div className="container mb-5">
+        <div id="top-bar" className="container mb-5">
           <div className="row justify-content-center">
             <form id="search-form" className="col-xs-6 col-sm-4 d-block" onSubmit={this.handleSubmit}>
               <input className="d-block form-control mt-3" type="text" value={this.state.value} placeholder="Enter search keyword" onChange={this.handleChange} />
@@ -54,10 +54,12 @@ class App extends Component {
             </form>
           </div>
         </div>
+
         
         {items.length ? (
               <div>
-                <h4 className="mb-5">Displaying results for "{this.state.searchWord}"</h4>
+            <h6 className="sticky text-right mr-5"><a href="#top-bar"><span className="badge badge-warning">Search Again</span></a></h6>
+                <h4 className="mb-5 text-center">Displaying results for "{this.state.searchWord}"</h4>
                 {items.map(item =>
                   <div>
                     <Book
@@ -73,7 +75,7 @@ class App extends Component {
                 )}
               </div>
         ) : (
-          <h4>No Books to Display</h4>
+          <h4 className="text-center">No Books to Display Yet</h4>
         )}
 
 
