@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import Book from './Book';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faBook } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faSearch)
+library.add(faBook)
 
 class App extends Component {
   constructor(props) {
@@ -36,28 +43,35 @@ class App extends Component {
     const { items } = this.state;
     return (
       <div className="App">
-        <h1 className="text-center d-block">BookFinder</h1>
+        <h1 className="text-center d-block">Book Finder <FontAwesomeIcon icon={faBook} /></h1>
         <div className="container mb-5">
           <div className="row justify-content-center">
-            <form id="search-form" className="col-4 d-block" onSubmit={this.handleSubmit}>
+            <form id="search-form" className="col-xs-6 col-sm-4 d-block" onSubmit={this.handleSubmit}>
               <input className="d-block form-control mt-3" type="text" value={this.state.value} placeholder="Enter search keyword" onChange={this.handleChange} />
-              <input type="submit" value="Submit" className="btn btn-success d-block form-control mt-3" />
+              <div>
+                <button id="get-btn" type="submit" value="Submit" className="btn btn-success d-block form-control mt-3"><FontAwesomeIcon icon={faSearch} /> Get Books</button> 
+              </div>
             </form>
           </div>
         </div>
         
         {items.length ? (
-          <div>
-            <h4 className="mb-5">Displaying results for "{this.state.searchWord}"</h4>
-            {items.map(item =>
-              <Book 
-                imgUrl={item.volumeInfo.imageLinks}
-                title={item.volumeInfo.title}
-                authors={item.volumeInfo.authors}
-                publisher={item.volumeInfo.publisher}
-              />
-            )}
-          </div>
+              <div>
+                <h4 className="mb-5">Displaying results for "{this.state.searchWord}"</h4>
+                {items.map(item =>
+                  <div>
+                    <Book
+                      imgUrl={item.volumeInfo.imageLinks}
+                      title={item.volumeInfo.title}
+                      authors={item.volumeInfo.authors}
+                      publisher={item.volumeInfo.publisher}
+                      info={item.volumeInfo.infoLink}
+                    />
+                    <hr className="w-50 mt-4"/>
+                  </div>
+
+                )}
+              </div>
         ) : (
           <h4>No Books to Display</h4>
         )}
