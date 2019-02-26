@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Book from './Book';
+import Footer from './Footer';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -17,7 +18,6 @@ class App extends Component {
       items: [],
       searchWord: ''
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -32,8 +32,14 @@ class App extends Component {
     .then((res) => res.json())
     /*.then(data => this.setState({items: data.items}));*/
     .then((data) => {
-      this.setState({items: data.items});
-      console.log(data);
+      var bookshelf = [];
+      for (let j = 0; j < data.items.length; j+=2) {
+        bookshelf.push(data.items.slice(j, j + 2));
+      }
+      this.setState({items: bookshelf})
+      //this.setState({items: data.items});
+      //console.log(data);
+      //console.log(items);
     })
     this.setState({value: '', searchWord: this.state.value})
     e.preventDefault();
@@ -60,25 +66,27 @@ class App extends Component {
               <div>
             <h6 className="sticky text-right mr-5"><a href="#top-bar"><span className="badge badge-warning">Search Again</span></a></h6>
                 <h4 className="mb-5 text-center">Displaying results for "{this.state.searchWord}"</h4>
-                {items.map(item =>
-                  <div>
-                    <Book
-                      imgUrl={item.volumeInfo.imageLinks}
-                      title={item.volumeInfo.title}
-                      authors={item.volumeInfo.authors}
-                      publisher={item.volumeInfo.publisher}
-                      info={item.volumeInfo.infoLink}
-                    />
-                    <hr className="w-50 mt-4"/>
+                <div id="bookshelf" className="container mt-3">
+                {items.map(shelf =>
+                  <div className="row justify-content-center shelf">
+                     {shelf.map(book => 
+                       <Book
+                         imgUrl={book.volumeInfo.imageLinks}
+                         title={book.volumeInfo.title}
+                         authors={book.volumeInfo.authors}
+                         publisher={book.volumeInfo.publisher}
+                         info={book.volumeInfo.infoLink}
+                       />
+                      )}
                   </div>
-
                 )}
+                </div>
               </div>
         ) : (
           <h4 className="text-center">No Books to Display Yet</h4>
         )}
 
-
+          <Footer />
       </div>
     );
   }
