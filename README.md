@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Powered by [Google Books APIs](https://developers.google.com/books/)<br>
 <hr>
 
-This application was one of the requirements of the Pre-Work section of the [Chingu 2019 Cohort](https://chingu.gitbook.io/cohort/introduction-to-chingu/what-is-chingu).<br>
+This application was one of the requirements of the Voyage 8 Pre-Work section of the [Chingu 2019 Cohort](https://chingu.gitbook.io/cohort/introduction-to-chingu/what-is-chingu).<br>
 Try out this application [HERE](https://willjw3.github.io/BookFinder/).<br>
 ![alt text][logo]
 
